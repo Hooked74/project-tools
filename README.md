@@ -1,8 +1,8 @@
 <h1 align="center"><strong>Project Tools</strong></h1>
 
 [![Build Status](https://travis-ci.org/Hooked74/project-tools.svg?branch=master)](https://travis-ci.org/Hooked74/project-tools)
-![npm](https://img.shields.io/npm/v/@hooked74/project-tools)
-![NPM](https://img.shields.io/npm/l/@hooked74/project-tools)
+[![npm](https://img.shields.io/npm/v/@hooked74/project-tools)](https://www.npmjs.com/package/@hooked74/project-tools)
+[![License](https://img.shields.io/npm/l/@hooked74/project-tools)](https://github.com/Hooked74/project-tools/blob/master/LICENSE)
 
 ## Table of contents
 
