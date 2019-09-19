@@ -1,3 +1,4 @@
+const chalk = require("chalk");
 const { error } = require("simple-output");
 const log = require("./utils/log");
 const { promisify } = require("util");
@@ -12,9 +13,7 @@ const writeFileAsync = promisify(writeFile);
     await Promise.all([
       log(() =>
         execAsync(
-          `${resolve(
-            "node_modules/typescript/bin/tsc"
-          )} --project tsconfig.types.json`
+          `${resolve("node_modules/typescript/bin/tsc")} --project tsconfig.types.json`
         ).then(() => "Typescript definitions created")
       ),
       log(() =>
@@ -33,9 +32,7 @@ const writeFileAsync = promisify(writeFile);
     log(() =>
       writeFileAsync(
         indexdtsPath,
-        `/// <reference path="common.d.ts" />\n\n${readFileSync(
-          indexdtsPath
-        ).toString()}`
+        `/// <reference path="common.d.ts" />\n\n${readFileSync(indexdtsPath).toString()}`
       ).then(() => `Overwritten ${chalk.cyan(indexdtsPath)}`)
     );
   } catch (e) {
