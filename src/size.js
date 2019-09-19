@@ -21,21 +21,19 @@ function convertSize(size, unitIterator, lastUnitValue) {
 
     const sizeJson = JSON.parse(readFileSync(sizeSnapshotPath));
 
-    await log(
-      (async () => {
-        sizeJson.module = convertSize(
-          sizeJson[pkg.main].gzipped,
-          units.values(),
-          units[units.length - 1]
-        );
-      }).then(() => "Convert module size")
-    );
+    await log(async () => {
+      sizeJson.module = convertSize(
+        sizeJson[pkg.main].gzipped,
+        units.values(),
+        units[units.length - 1]
+      );
+      return "Convert module size";
+    });
 
-    await log(
-      (async () => {
-        writeFileSync(sizeSnapshotPath, JSON.stringify(sizeJson, null, 2));
-      }).then(() => "Overwrite file with sizes")
-    );
+    await log(async () => {
+      writeFileSync(sizeSnapshotPath, JSON.stringify(sizeJson, null, 2));
+      return "Overwrite file with sizes";
+    });
 
     message("End build size conversion");
   } else {
