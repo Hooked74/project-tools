@@ -1,6 +1,8 @@
 <h1 align="center"><strong>Project Tools</strong></h1>
 
 [![Build Status](https://travis-ci.org/Hooked74/project-tools.svg?branch=master)](https://travis-ci.org/Hooked74/project-tools)
+![npm](https://img.shields.io/npm/v/@hooked74/project-tools)
+![NPM](https://img.shields.io/npm/l/@hooked74/project-tools)
 
 ## Table of contents
 
