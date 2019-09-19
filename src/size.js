@@ -1,7 +1,7 @@
 const { error, message } = require("simple-output");
 const { resolve } = require("path");
 const { writeFileSync, readFileSync, existsSync } = require("fs");
-const pkg = require("../package");
+const pkg = require(`${process.cwd()}/package`);
 const log = require("./utils/log");
 
 const sizeSnapshotPath = resolve(".size-snapshot.json");
