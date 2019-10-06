@@ -44,6 +44,6 @@ project-tools storybook [options] <npm command>
 
 Has the following options:
 
-- **-p, -port** storybook port
-- **-t, -timeout** storybook process timeout
-
+- **-p, --port &lt;port&gt;** &nbsp;storybook port
+- **-t, --timeout &lt;timeout&gt;** &nbsp;storybook process timeout
+- **--ci** &nbsp;CI mode (skip interactive prompts, don't open browser)

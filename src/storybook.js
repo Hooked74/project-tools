@@ -12,6 +12,7 @@ async function getOptions() {
     .arguments("<cmd>")
     .option("-p, --port <port>", "storybook port")
     .option("-t, --timeout <timeout>", "storybook process timeout")
+    .option("--ci", "CI mode (skip interactive prompts, don't open browser)")
     .action(cmd => (command = cmd))
     .parse(process.argv);
 
@@ -19,15 +20,15 @@ async function getOptions() {
   const port = parseInt(program.port) || (await findFreePorts())[0];
   const timeout = parseInt(program.timeout) || 60000;
 
-  return { host, port, timeout, command };
+  return { host, port, timeout, command, ci: program.ci };
 }
 
-function startStorybookProcess(port) {
+function startStorybookProcess(port, ci) {
   info("Start storybook process...");
 
   const storybook = spawn(
     process.execPath,
-    [join("node_modules", ".bin", "start-storybook"), "-p", port],
+    [join("node_modules", ".bin", "start-storybook"), "-p", port, ci && "--ci"].filter(Boolean),
     { stdio: "inherit", cwd: process.cwd() }
   );
 
@@ -74,7 +75,7 @@ function errorHandler(e) {
     throw new Error(`Port ${options.port} is already in use`);
   });
 
-  const storybookPromise = startStorybookProcess(options.port);
+  const storybookPromise = startStorybookProcess(options.port, options.ci);
 
   await connectToPort(options);
   await Promise.race([storybookPromise, startNpmProcess(options.command)]);
