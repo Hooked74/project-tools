@@ -11,4 +11,11 @@ program
   .command("types", "add the common.d.ts file to the generated types", {
     executableFile: "types"
   })
+  .command(
+    "storybook <cmd>",
+    "start the storybook process and while it's running it execute the npm <cmd>",
+    {
+      executableFile: "storybook"
+    }
+  )
   .parse(process.argv);

@@ -1,6 +1,6 @@
 {
   "name": "@hooked74/project-tools",
-  "version": "1.0.8",
+  "version": "1.1.0",
   "description": "Helper tools for project",
   "main": "src/index.js",
   "bin": "src/index.js",
@@ -34,7 +34,10 @@
   },
   "dependencies": {
     "chalk": "^2.4.2",
-    "commander": "^3.0.1",
-    "simple-output": "^1.0.1"
+    "commander": "^3.0.2",
+    "find-free-ports": "^1.1.0",
+    "is-port-free": "^1.0.7",
+    "simple-output": "^1.0.1",
+    "wait-port": "^0.2.4"
   }
 }

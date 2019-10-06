@@ -33,3 +33,17 @@ Add the size of the minified gzip module to the **.size-snapshot.json** file. Co
 ### **types**
 
 Format types in a compiled project and add common types from **src/react-app-env.d.ts** to the **dist/common.d.ts**. Also add a reference to the **common.d.ts** file in **index.d.ts**.
+
+### **storybook**
+
+Start the storybook process and while it's running it execute the npm process. Need to pass npm command. Usage:
+
+```
+project-tools storybook [options] <npm command>
+```
+
+Has the following options:
+
+- **-p, -port** storybook port
+- **-t, -timeout** storybook process timeout
+
