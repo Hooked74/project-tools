@@ -1,5 +1,5 @@
 const { existsSync } = require("fs");
-const chalk = require("react-dev-utils/chalk");
+const chalk = require("chalk");
 const { testsSetup, moduleFileExtensions, appPackageJson } = require("../config/paths");
 const { additionalModulePaths, jestAliases } = require("../config/modules");
 
