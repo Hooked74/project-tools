@@ -1,5 +1,5 @@
 const { resolve } = require("path");
-const { realpathSync, existsSync } = require("fs");
+const { realpathSync } = require("fs");
 const url = require("url");
 
 const moduleFileExtensions = [
@@ -19,18 +19,6 @@ const moduleFileExtensions = [
 const appDirectory = realpathSync(process.cwd());
 const resolveApp = relativePath => resolve(appDirectory, relativePath);
 
-const resolveModule = (resolveFn, filePath) => {
-  const extension = moduleFileExtensions.find(extension =>
-    existsSync(resolveFn(`${filePath}.${extension}`))
-  );
-
-  if (extension) {
-    return resolveFn(`${filePath}.${extension}`);
-  }
-
-  return resolveFn(`${filePath}.js`);
-};
-
 module.exports = {
   dotenv: resolveApp(".env"),
   appPath: resolveApp("."),
@@ -39,6 +27,6 @@ module.exports = {
   appTsConfig: resolveApp("tsconfig.json"),
   appNodeModules: resolveApp("node_modules"),
   appPackageJson: resolveApp("package.json"),
-  testsSetup: resolveModule(resolveApp, "src/setupTests"),
+  testsSetup: resolveApp("setupTests.js"),
   moduleFileExtensions
 };

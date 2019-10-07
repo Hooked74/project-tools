@@ -4,10 +4,10 @@ const { testsSetup, moduleFileExtensions, appPackageJson } = require("../config/
 const { additionalModulePaths, jestAliases } = require("../config/modules");
 
 module.exports = (resolve, rootDir) => {
-  const setupTestsMatches = testsSetup.match(/src[/\\]setupTests\.(.+)/);
+  const setupTestsMatches = testsSetup.match(/setupTests\.(.+)/);
   const setupTestsFileExtension = (setupTestsMatches && setupTestsMatches[1]) || "js";
   const setupTestsFile = existsSync(testsSetup)
-    ? `<rootDir>/src/setupTests.${setupTestsFileExtension}`
+    ? `<rootDir>/setupTests.${setupTestsFileExtension}`
     : undefined;
 
   const config = {
@@ -36,8 +36,7 @@ module.exports = (resolve, rootDir) => {
       ...(jestAliases || {})
     },
     moduleFileExtensions: [...moduleFileExtensions, "node"].filter(ext => !ext.includes("mjs")),
-    watchPlugins: ["jest-watch-typeahead/filename", "jest-watch-typeahead/testname"],
-    setupTestFrameworkScriptFile: "<rootDir>/setupTests.js"
+    watchPlugins: ["jest-watch-typeahead/filename", "jest-watch-typeahead/testname"]
   };
   if (rootDir) {
     config.rootDir = rootDir;
