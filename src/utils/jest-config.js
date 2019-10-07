@@ -1,7 +1,7 @@
 const { existsSync } = require("fs");
 const chalk = require("react-dev-utils/chalk");
-const { testsSetup, moduleFileExtensions, appPackageJson } = require("../../config/paths");
-const { additionalModulePaths, jestAliases } = require("../../config/modules");
+const { testsSetup, moduleFileExtensions, appPackageJson } = require("../config/paths");
+const { additionalModulePaths, jestAliases } = require("../config/modules");
 
 module.exports = (resolve, rootDir) => {
   const setupTestsMatches = testsSetup.match(/src[/\\]setupTests\.(.+)/);
