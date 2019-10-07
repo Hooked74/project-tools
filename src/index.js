@@ -18,4 +18,7 @@ program
       executableFile: "storybook"
     }
   )
+  .command("test", "run tests using jest", {
+    executableFile: "test"
+  })
   .parse(process.argv);

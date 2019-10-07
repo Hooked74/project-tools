@@ -47,3 +47,13 @@ Has the following options:
 - **-p, --port &lt;port&gt;** &nbsp;storybook port
 - **-t, --timeout &lt;timeout&gt;** &nbsp;storybook process timeout
 - **--ci** &nbsp;CI mode (skip interactive prompts, don't open browser)
+
+### **test**
+
+This command is a stripped down version of **react-scripts test**. Usage:
+
+```
+project-tools test [options]
+```
+
+The command has the same options as [Jest](https://jestjs.io/docs/en/cli). More information can be obtained [here](https://create-react-app.dev/docs/running-tests).
