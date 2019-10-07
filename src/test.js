@@ -1,3 +1,7 @@
+process.env.BABEL_ENV = "test";
+process.env.NODE_ENV = "test";
+process.env.PUBLIC_URL = "";
+
 require("./config/env");
 
 const jest = require("jest");
@@ -13,10 +17,6 @@ const cleanArgv = [];
 let env = "jsdom";
 let resolvedEnv;
 let next;
-
-process.env.BABEL_ENV = "test";
-process.env.NODE_ENV = "test";
-process.env.PUBLIC_URL = "";
 
 function resolveJestDefaultEnvironment(name) {
   const jestDir = path.dirname(
