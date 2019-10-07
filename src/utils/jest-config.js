@@ -37,7 +37,7 @@ module.exports = (resolve, rootDir) => {
     },
     moduleFileExtensions: [...moduleFileExtensions, "node"].filter(ext => !ext.includes("mjs")),
     watchPlugins: ["jest-watch-typeahead/filename", "jest-watch-typeahead/testname"],
-    setupTestFrameworkScriptFile: "<rootDir>/src/setupTests.js"
+    setupTestFrameworkScriptFile: "<rootDir>/setupTests.js"
   };
   if (rootDir) {
     config.rootDir = rootDir;
