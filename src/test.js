@@ -12,8 +12,8 @@ const path = require("path");
 const resolve = require("resolve");
 const { appSrc } = require("./config/paths");
 
-const argv = process.argv.slice(2);
 const cleanArgv = [];
+let argv = process.argv.slice(2);
 let env = "jsdom";
 let resolvedEnv;
 let next;
