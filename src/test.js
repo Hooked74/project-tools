@@ -10,7 +10,7 @@ const { isInGitRepository, isInMercurialRepository } = require("./utils/reposito
 const createJestConfig = require("./utils/jest-config");
 const path = require("path");
 const resolve = require("resolve");
-const { appSrc } = require("../config/paths");
+const { appSrc } = require("./config/paths");
 
 const argv = process.argv.slice(2);
 const cleanArgv = [];
