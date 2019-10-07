@@ -50,7 +50,7 @@ Has the following options:
 
 ### **test**
 
-This command is a stripped down version of **react-scripts test**. Usage:
+This command is a stripped down version of [react-scripts test](https://github.com/facebook/create-react-app/tree/master/packages/react-scripts). Usage:
 
 ```
 project-tools test [options]
