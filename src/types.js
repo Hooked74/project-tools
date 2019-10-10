@@ -19,7 +19,7 @@ const writeFileAsync = promisify(writeFile);
       log(() =>
         writeFileAsync(
           resolve("dist/common.d.ts"),
-          readFileSync(resolve("src/react-app-env.d.ts"))
+          readFileSync(resolve("src/index.d.ts"))
             .toString()
             .split("\n")
             .filter(s => s && !s.includes('types="react-scripts"'))
@@ -36,6 +36,6 @@ const writeFileAsync = promisify(writeFile);
       ).then(() => `Overwritten ${chalk.cyan(indexdtsPath)}`)
     );
   } catch (e) {
-    error(e.stdout.toString());
+    error(e.stdout ? e.stdout.toString() : e);
   }
 })();
