@@ -19,7 +19,7 @@ const writeFileAsync = promisify(writeFile);
       log(() =>
         writeFileAsync(
           resolve("dist/common.d.ts"),
-          readFileSync(resolve("src/index.d.ts"))
+          readFileSync(resolve("src/common.d.ts"))
             .toString()
             .split("\n")
             .filter(s => s && !s.includes('types="react-scripts"'))
