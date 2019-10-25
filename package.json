@@ -1,6 +1,6 @@
 {
   "name": "@hooked74/project-tools",
-  "version": "1.2.8",
+  "version": "1.2.9",
   "description": "Helper tools for project",
   "main": "src/index.js",
   "bin": "src/index.js",
@@ -38,17 +38,17 @@
     "camelcase": "^5.3.1",
     "chalk": "^2.4.2",
     "commander": "^3.0.2",
-    "dotenv": "^8.1.0",
+    "dotenv": "^8.2.0",
     "dotenv-expand": "^5.1.0",
     "find-free-ports": "^1.1.0",
     "identity-obj-proxy": "^3.0.0",
     "is-port-free": "^1.0.7",
     "jest": "^24.9.0",
-    "jest-environment-jsdom-fourteen": "^0.1.0",
+    "jest-environment-jsdom-fifteen": "^1.0.0",
     "jest-watch-typeahead": "^0.4.0",
-    "react-app-polyfill": "^1.0.4",
     "resolve": "^1.12.0",
-    "simple-output": "^1.0.1",
-    "wait-port": "^0.2.4"
+    "simple-output": "^2.0.0",
+    "wait-port": "^0.2.6",
+    "whatwg-fetch": "^3.0.0"
   }
 }

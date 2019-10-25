@@ -1,7 +1,7 @@
 const { existsSync } = require("fs");
 const chalk = require("chalk");
-const { testsSetup, moduleFileExtensions, appPackageJson } = require("../config/paths");
-const { additionalModulePaths, jestAliases } = require("../config/modules");
+const { testsSetup, moduleFileExtensions, appPackageJson } = require("../paths");
+const { additionalModulePaths, jestAliases } = require("../modules");
 
 module.exports = (resolve, rootDir) => {
   const setupTestsMatches = testsSetup.match(/setupTests\.(.+)/);
@@ -13,17 +13,17 @@ module.exports = (resolve, rootDir) => {
   const config = {
     roots: ["<rootDir>/src"],
     collectCoverageFrom: ["src/**/*.{js,jsx,ts,tsx}", "!src/**/*.d.ts"],
-    setupFiles: [require.resolve("react-app-polyfill/jsdom")],
+    setupFiles: [resolve("config/jest/polyfills")],
     setupFilesAfterEnv: setupTestsFile ? [setupTestsFile] : [],
     testMatch: [
       "<rootDir>/src/**/__tests__/**/*.{js,jsx,ts,tsx}",
       "<rootDir>/src/**/*.{spec,test}.{js,jsx,ts,tsx}"
     ],
-    testEnvironment: "jest-environment-jsdom-fourteen",
+    testEnvironment: "jest-environment-jsdom-fifteen",
     transform: {
-      "^.+\\.(js|jsx|ts|tsx)$": resolve("config/jest/babelTransform.js"),
-      "^.+\\.css$": resolve("config/jest/cssTransform.js"),
-      "^(?!.*\\.(js|jsx|ts|tsx|css|json)$)": resolve("config/jest/fileTransform.js")
+      "^.+\\.(js|jsx|ts|tsx)$": resolve("config/jest/babel-transform.js"),
+      "^.+\\.css$": resolve("config/jest/css-transform.js"),
+      "^(?!.*\\.(js|jsx|ts|tsx|css|json)$)": resolve("config/jest/file-transform.js")
     },
     transformIgnorePatterns: [
       "[/\\\\]node_modules[/\\\\].+\\.(js|jsx|ts|tsx)$",

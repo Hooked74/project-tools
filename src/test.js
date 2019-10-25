@@ -7,7 +7,7 @@ require("./config/env");
 const jest = require("jest");
 const { execSync } = require("child_process");
 const { isInGitRepository, isInMercurialRepository } = require("./utils/repository");
-const createJestConfig = require("./utils/jest-config");
+const createJestConfig = require("./config/jest");
 const path = require("path");
 const resolve = require("resolve");
 const { appSrc } = require("./config/paths");
