@@ -39,7 +39,25 @@ const writeFileAsync = promisify(writeFile);
     log(() =>
       writeFileAsync(
         resolve("dist/tsconfig.json"),
-        JSON.stringify({ extends: "../tsconfig.json", include: ["*.d.ts"] }, null, 2)
+        JSON.stringify(
+          {
+            extends: "../tsconfig.json",
+            include: ["*.d.ts"],
+            compilerOptions: {
+              typeRoots: [
+                "node_modules/@types",
+                "../../@types",
+                "../../../@types",
+                "node_modules/@h74-types",
+                "../../@h74-types",
+                "../../../@h74-types",
+                "../typings"
+              ]
+            }
+          },
+          null,
+          2
+        )
       ).then(() => `Generated ${chalk.cyan("tsconfig.json")}`)
     );
   } catch (e) {
