@@ -46,9 +46,11 @@ const writeFileAsync = promisify(writeFile);
             compilerOptions: {
               typeRoots: [
                 "node_modules/@types",
+                "../node_modules/@types",
                 "../../@types",
                 "../../../@types",
                 "node_modules/@h74-types",
+                "../node_modules/@h74-types",
                 "../../@h74-types",
                 "../../../@h74-types",
                 "../typings"
