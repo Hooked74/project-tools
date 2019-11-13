@@ -35,6 +35,13 @@ const writeFileAsync = promisify(writeFile);
         `/// <reference path="common.d.ts" />\n\n${readFileSync(indexdtsPath).toString()}`
       ).then(() => `Overwritten ${chalk.cyan(indexdtsPath)}`)
     );
+
+    log(() =>
+      writeFileAsync(
+        resolve("dist/tsconfig.json"),
+        JSON.stringify({ extends: "../tsconfig.json", include: ["*.d.ts"] }, null, 2)
+      ).then(() => `Generated ${chalk.cyan("tsconfig.json")}`)
+    );
   } catch (e) {
     error(e.stdout ? e.stdout.toString() : e);
     process.exit(1);
