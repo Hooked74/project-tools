@@ -37,5 +37,6 @@ const writeFileAsync = promisify(writeFile);
     );
   } catch (e) {
     error(e.stdout ? e.stdout.toString() : e);
+    process.exit(1);
   }
 })();
