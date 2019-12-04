@@ -48,6 +48,19 @@ Has the following options:
 - **-t, --timeout &lt;timeout&gt;** &nbsp;storybook process timeout
 - **--ci** &nbsp;CI mode (skip interactive prompts, don't open browser)
 
+### **chain-process**
+
+Start the first process and while it's running it execute the second process. Usage:
+
+```
+project-tools chain-process [options] <command1> <command2>
+```
+
+Has the following options:
+
+- **-p, --port &lt;port&gt;** &nbsp;process port
+- **-t, --timeout &lt;timeout&gt;** &nbsp;first process timeout
+
 ### **test**
 
 This command is a stripped down version of [react-scripts test](https://github.com/facebook/create-react-app/tree/master/packages/react-scripts). Usage:

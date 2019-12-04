@@ -21,4 +21,11 @@ program
   .command("test", "run tests using jest", {
     executableFile: "test"
   })
+  .command(
+    "chain-process <cmd1> <cmd2>",
+    "start the first process and while it's running it execute the second process",
+    {
+      executableFile: "chain-process"
+    }
+  )
   .parse(process.argv);
