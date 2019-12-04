@@ -22,13 +22,12 @@ async function getOptions() {
 }
 
 function startProcess(command) {
-  info(`Start command - ${command}...`);
+  info(`Start npm process - ${command}...`);
 
-  const splitedCommand = command.split(" ");
-  const process = spawn(command[0], command.slice(1), { stdio: "inherit", cwd: process.cwd() });
-  process.on("exit", () => storybook.kill());
+  const process = spawn("npm", ["run", command], { stdio: "inherit" });
+  process.on("exit", () => process.kill());
 
-  return promisifyProcess(storybook);
+  return promisifyProcess(process);
 }
 
 function connectToPort(options) {
