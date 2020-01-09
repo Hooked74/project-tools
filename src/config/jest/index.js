@@ -3,7 +3,8 @@ const chalk = require("chalk");
 const { testsSetup, moduleFileExtensions, appPackageJson } = require("../paths");
 const { additionalModulePaths, jestAliases } = require("../modules");
 
-module.exports = (resolve, rootDir) => {
+module.exports = (resolve, rootDir, srcDirs) => {
+  const srcDirsArray = srcDirs.split(",");
   const setupTestsMatches = testsSetup.match(/setupTests\.(.+)/);
   const setupTestsFileExtension = (setupTestsMatches && setupTestsMatches[1]) || "js";
   const setupTestsFile = existsSync(testsSetup)
@@ -11,13 +12,13 @@ module.exports = (resolve, rootDir) => {
     : undefined;
 
   const config = {
-    roots: ["<rootDir>/src"],
-    collectCoverageFrom: ["src/**/*.{js,jsx,ts,tsx}", "!src/**/*.d.ts"],
+    roots: srcDirsArray.map(dir => `<rootDir>/${dir}`),
+    collectCoverageFrom: [`{${srcDirs}}/**/*.{js,jsx,ts,tsx}`, `!{${srcDirs}}/**/*.d.ts`],
     setupFiles: [resolve("config/jest/polyfills")],
     setupFilesAfterEnv: setupTestsFile ? [setupTestsFile] : [],
     testMatch: [
-      "<rootDir>/src/**/__tests__/**/*.{js,jsx,ts,tsx}",
-      "<rootDir>/src/**/*.{spec,test}.{js,jsx,ts,tsx}"
+      `<rootDir>/{${srcDirs}}/**/__tests__/**/*.{js,jsx,ts,tsx}`,
+      `<rootDir>/{${srcDirs}}/**/*.{spec,test}.{js,jsx,ts,tsx}`
     ],
     testEnvironment: "jest-environment-jsdom-fifteen",
     transform: {
@@ -81,7 +82,7 @@ module.exports = (resolve, rootDir) => {
               chalk.bold("setupFilesAfterEnv") +
               " in your package.json.\n\n" +
               "Remove it from Jest configuration, and put the initialization code in " +
-              chalk.bold("src/setupTests.js") +
+              chalk.bold("setupTests.js") +
               ".\nThis file will be loaded automatically.\n"
           )
         );

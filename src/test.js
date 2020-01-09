@@ -10,11 +10,12 @@ const { isInGitRepository, isInMercurialRepository } = require("./utils/reposito
 const createJestConfig = require("./config/jest");
 const path = require("path");
 const resolve = require("resolve");
-const { appSrc } = require("./config/paths");
+const { appPath } = require("./config/paths");
 
 const cleanArgv = [];
 let argv = process.argv.slice(2);
 let env = "jsdom";
+let srcDirs = "src";
 let resolvedEnv;
 let next;
 
@@ -51,26 +52,32 @@ if (
   argv.push(isInGitRepository() || isInMercurialRepository() ? "--watch" : "--watchAll");
 }
 
+do {
+  next = argv.shift();
+  switch (true) {
+    case next === "--env":
+      env = argv.shift();
+      break;
+    case next.indexOf("--env=") === 0:
+      env = next.substring("--env=".length);
+      break;
+    case next === "--dirs":
+      srcDirs = argv.shift();
+      break;
+    case next.indexOf("--dirs=") === 0:
+      srcDirs = next.substring("--dirs=".length);
+      break;
+    default:
+      cleanArgv.push(next);
+  }
+} while (argv.length > 0);
+
 argv.push(
   "--config",
   JSON.stringify(
-    createJestConfig(
-      relativePath => path.resolve(__dirname, relativePath),
-      path.resolve(appSrc, "..")
-    )
+    createJestConfig(relativePath => path.resolve(__dirname, relativePath), appPath, srcDirs)
   )
 );
-
-do {
-  next = argv.shift();
-  if (next === "--env") {
-    env = argv.shift();
-  } else if (next.indexOf("--env=") === 0) {
-    env = next.substring("--env=".length);
-  } else {
-    cleanArgv.push(next);
-  }
-} while (argv.length > 0);
 
 argv = cleanArgv;
 
