@@ -23,8 +23,8 @@ module.exports = (resolve, rootDir, srcDirs) => {
     testEnvironment: "jest-environment-jsdom-fifteen",
     transform: {
       "^.+\\.(js|jsx|ts|tsx)$": resolve("config/jest/babel-transform.js"),
-      "^.+\\.(css|less)$": resolve("config/jest/css-transform.js"),
-      "^(?!.*\\.(js|jsx|ts|tsx|css|less|json)$)": resolve("config/jest/file-transform.js")
+      "^.+\\.css$": resolve("config/jest/css-transform.js"),
+      "^(?!.*\\.(js|jsx|ts|tsx|css|json)$)": resolve("config/jest/file-transform.js")
     },
     transformIgnorePatterns: [
       "[/\\\\]node_modules[/\\\\].+\\.(js|jsx|ts|tsx)$",

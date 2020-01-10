@@ -72,14 +72,14 @@ do {
   }
 } while (argv.length > 0);
 
+argv = cleanArgv;
+
 argv.push(
   "--config",
   JSON.stringify(
     createJestConfig(relativePath => path.resolve(__dirname, relativePath), appPath, srcDirs)
   )
 );
-
-argv = cleanArgv;
 
 try {
   resolvedEnv =
