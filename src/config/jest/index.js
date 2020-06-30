@@ -3,7 +3,7 @@ const chalk = require("chalk");
 const { testsSetup, moduleFileExtensions, appPackageJson } = require("../paths");
 const { additionalModulePaths, jestAliases } = require("../modules");
 
-module.exports = (resolve, rootDir, srcDirs) => {
+module.exports = (resolve, rootDir, srcDirs, tsOriginalDirs) => {
   const srcDirsArray = srcDirs.split(",");
   const setupTestsMatches = testsSetup.match(/setupTests\.(.+)/);
   const setupTestsFileExtension = (setupTestsMatches && setupTestsMatches[1]) || "js";
@@ -22,6 +22,7 @@ module.exports = (resolve, rootDir, srcDirs) => {
     ],
     testEnvironment: "jest-environment-jsdom-fifteen",
     transform: {
+      ...(tsOriginalDirs ? {[`^.*?${tsOriginalDirs}.+\\.(js|jsx|ts|tsx)$`]: require.resolve("ts-jest") : {}),
       "^.+\\.(js|jsx|ts|tsx)$": resolve("config/jest/babel-transform.js"),
       "^.+\\.css$": resolve("config/jest/css-transform.js"),
       "^(?!.*\\.(js|jsx|ts|tsx|css|json)$)": resolve("config/jest/file-transform.js")

@@ -16,31 +16,32 @@ const cleanArgv = [];
 let argv = process.argv.slice(2);
 let env = "jsdom";
 let srcDirs = "src";
+let tsOriginalDirs = "";
 let resolvedEnv;
 let next;
 
 function resolveJestDefaultEnvironment(name) {
   const jestDir = path.dirname(
     resolve.sync("jest", {
-      basedir: __dirname
+      basedir: __dirname,
     })
   );
   const jestCLIDir = path.dirname(
     resolve.sync("jest-cli", {
-      basedir: jestDir
+      basedir: jestDir,
     })
   );
   const jestConfigDir = path.dirname(
     resolve.sync("jest-config", {
-      basedir: jestCLIDir
+      basedir: jestCLIDir,
     })
   );
   return resolve.sync(name, {
-    basedir: jestConfigDir
+    basedir: jestConfigDir,
   });
 }
 
-process.on("unhandledRejection", err => {
+process.on("unhandledRejection", (err) => {
   throw err;
 });
 
@@ -67,6 +68,9 @@ do {
     case next.indexOf("--dirs=") === 0:
       srcDirs = next.substring("--dirs=".length);
       break;
+    case next.indexOf("--ts-original-dirs=") === 0:
+      tsOriginalDirs = next.substring("--ts-original-dirs=".length).replace(/,/g, "|");
+      break;
     default:
       cleanArgv.push(next);
   }
@@ -77,7 +81,12 @@ argv = cleanArgv;
 argv.push(
   "--config",
   JSON.stringify(
-    createJestConfig(relativePath => path.resolve(__dirname, relativePath), appPath, srcDirs)
+    createJestConfig(
+      (relativePath) => path.resolve(__dirname, relativePath),
+      appPath,
+      srcDirs,
+      tsOriginalDirs
+    )
   )
 );
 
