@@ -12,33 +12,35 @@ module.exports = (resolve, rootDir, srcDirs, tsOriginalDirs) => {
     : undefined;
 
   const config = {
-    roots: srcDirsArray.map(dir => `<rootDir>/${dir}`),
+    roots: srcDirsArray.map((dir) => `<rootDir>/${dir}`),
     collectCoverageFrom: [`{${srcDirs}}/**/*.{js,jsx,ts,tsx}`, `!{${srcDirs}}/**/*.d.ts`],
     setupFiles: [resolve("config/jest/polyfills")],
     setupFilesAfterEnv: setupTestsFile ? [setupTestsFile] : [],
     testMatch: [
       `<rootDir>/{${srcDirs}}/**/__tests__/**/*.{js,jsx,ts,tsx}`,
-      `<rootDir>/{${srcDirs}}/**/*.{spec,test}.{js,jsx,ts,tsx}`
+      `<rootDir>/{${srcDirs}}/**/*.{spec,test}.{js,jsx,ts,tsx}`,
     ],
     testEnvironment: "jest-environment-jsdom-fifteen",
     transform: {
-      ...(tsOriginalDirs ? {[`^.*?${tsOriginalDirs}.+\\.(js|jsx|ts|tsx)$`]: require.resolve("ts-jest") : {}),
+      ...(tsOriginalDirs
+        ? { [`^.*?${tsOriginalDirs}.+\\.(js|jsx|ts|tsx)$`]: require.resolve("ts-jest") }
+        : {}),
       "^.+\\.(js|jsx|ts|tsx)$": resolve("config/jest/babel-transform.js"),
       "^.+\\.css$": resolve("config/jest/css-transform.js"),
-      "^(?!.*\\.(js|jsx|ts|tsx|css|json)$)": resolve("config/jest/file-transform.js")
+      "^(?!.*\\.(js|jsx|ts|tsx|css|json)$)": resolve("config/jest/file-transform.js"),
     },
     transformIgnorePatterns: [
       "[/\\\\]node_modules[/\\\\].+\\.(js|jsx|ts|tsx)$",
-      "^.+\\.module\\.(css|sass|scss|less)$"
+      "^.+\\.module\\.(css|sass|scss|less)$",
     ],
     modulePaths: additionalModulePaths || [],
     moduleNameMapper: {
       "^react-native$": "react-native-web",
       "^.+\\.module\\.(css|sass|scss|less)$": "identity-obj-proxy",
-      ...(jestAliases || {})
+      ...(jestAliases || {}),
     },
-    moduleFileExtensions: [...moduleFileExtensions, "node"].filter(ext => !ext.includes("mjs")),
-    watchPlugins: ["jest-watch-typeahead/filename", "jest-watch-typeahead/testname"]
+    moduleFileExtensions: [...moduleFileExtensions, "node"].filter((ext) => !ext.includes("mjs")),
+    watchPlugins: ["jest-watch-typeahead/filename", "jest-watch-typeahead/testname"],
   };
   if (rootDir) {
     config.rootDir = rootDir;
@@ -58,10 +60,10 @@ module.exports = (resolve, rootDir, srcDirs, tsOriginalDirs) => {
     "snapshotSerializers",
     "transform",
     "transformIgnorePatterns",
-    "watchPathIgnorePatterns"
+    "watchPathIgnorePatterns",
   ];
   if (overrides) {
-    supportedKeys.forEach(key => {
+    supportedKeys.forEach((key) => {
       if (Object.prototype.hasOwnProperty.call(overrides, key)) {
         if (Array.isArray(config[key]) || typeof config[key] !== "object") {
           config[key] = overrides[key];
@@ -92,11 +94,11 @@ module.exports = (resolve, rootDir, srcDirs, tsOriginalDirs) => {
           chalk.red(
             "\nOut of the box, Create React App only supports overriding " +
               "these Jest options:\n\n" +
-              supportedKeys.map(key => chalk.bold("  \u2022 " + key)).join("\n") +
+              supportedKeys.map((key) => chalk.bold("  \u2022 " + key)).join("\n") +
               ".\n\n" +
               "These options in your package.json Jest configuration " +
               "are not currently supported by Create React App:\n\n" +
-              unsupportedKeys.map(key => chalk.bold("  \u2022 " + key)).join("\n") +
+              unsupportedKeys.map((key) => chalk.bold("  \u2022 " + key)).join("\n") +
               "\n\nIf you wish to override other Jest options, you need to " +
               "eject from the default setup. You can do so by running " +
               chalk.bold("npm run eject") +
