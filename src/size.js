@@ -20,10 +20,11 @@ function convertSize(size, unitIterator, lastUnitValue) {
     message(`Start build size conversion. Parse ${sizeSnapshotPath}`);
 
     const sizeJson = JSON.parse(readFileSync(sizeSnapshotPath));
+    const sizeKey = Object.keys(sizeJson).find((key) => /\.cjs\.js$/.test(key));
 
     await log(async () => {
       sizeJson.module = convertSize(
-        sizeJson[pkg.main].gzipped,
+        sizeJson[sizeKey].gzipped,
         units.values(),
         units[units.length - 1]
       );
