@@ -10,6 +10,7 @@ module.exports = babelJest.createTransformer({
       },
     ],
     require.resolve("babel-plugin-parameter-decorator"),
+    require.resolve("babel-plugin-transform-typescript-metadata"),
   ],
   babelrc: false,
   configFile: false,
