@@ -5,6 +5,7 @@ const { additionalModulePaths, jestAliases } = require("../modules");
 
 module.exports = (resolve, rootDir, srcDirs, tsOriginalDirs) => {
   const srcDirsArray = srcDirs.split(",");
+  const srcStringRegExp = srcDirsArray > 1 ? `{${srcDirs}}` : srcDirs;
   const setupTestsMatches = testsSetup.match(/setupTests\.(.+)/);
   const setupTestsFileExtension = (setupTestsMatches && setupTestsMatches[1]) || "js";
   const setupTestsFile = existsSync(testsSetup)
@@ -13,12 +14,15 @@ module.exports = (resolve, rootDir, srcDirs, tsOriginalDirs) => {
 
   const config = {
     roots: srcDirsArray.map((dir) => `<rootDir>/${dir}`),
-    collectCoverageFrom: [`{${srcDirs}}/**/*.{js,jsx,ts,tsx}`, `!{${srcDirs}}/**/*.d.ts`],
+    collectCoverageFrom: [
+      `${srcStringRegExp}/**/*.{js,jsx,ts,tsx}`,
+      `!${srcStringRegExp}/**/*.d.ts`,
+    ],
     setupFiles: [resolve("config/jest/polyfills")],
     setupFilesAfterEnv: setupTestsFile ? [setupTestsFile] : [],
     testMatch: [
-      `<rootDir>/{${srcDirs}}/**/__tests__/**/*.{js,jsx,ts,tsx}`,
-      `<rootDir>/{${srcDirs}}/**/*.{spec,test}.{js,jsx,ts,tsx}`,
+      `<rootDir>/${srcStringRegExp}/**/__tests__/**/*.{js,jsx,ts,tsx}`,
+      `<rootDir>/${srcStringRegExp}/**/*.{spec,test}.{js,jsx,ts,tsx}`,
     ],
     testEnvironment: "jest-environment-jsdom-fifteen",
     transform: {
